@@ -17,5 +17,6 @@ Second folder is full of scripts from a card/monster turn-based battle game. The
 I think that by comparing these two folders one can get some idea how much I have progressed and learned in a short time.
 
 -----------
-Korttipeli = Card game,
+Korttipeli = Card game
+
 Tasohyppelypeli = Platformer game
