@@ -1,0 +1,55 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PakanSäätäjä : MonoBehaviour {
+
+    public int D1CardID1;
+    public int D1CardID2;
+    public int D1CardID3;
+    public int D1CardID4;
+    public int D1CardID5;
+    public int D1CardID6;
+    public int D1CardID7;
+    public int D1CardID8;
+    public int D1CardID9;
+    public int D1CardID10;
+    public int D1CardID11;
+    public int D1CardID12;
+    public int D1CardID13;
+    public int D1CardID14;
+    public int D1CardID15;
+    public int D1CardID16;
+    public int D1CardID17;
+    public int D1CardID18;
+    public int D1CardID19;
+    public int D1CardID20;
+    public int D1CardID21;
+    public int D1CardID22;
+    public int D1CardID23;
+    public int D1CardID24;
+    public int D2CardID1;
+    public int D2CardID2;
+    public int D2CardID3;
+    public int D2CardID4;
+    public int D2CardID5;
+    public int D2CardID6;
+    public int D2CardID7;
+    public int D2CardID8;
+    public int D2CardID9;
+    public int D2CardID10;
+    public int D2CardID11;
+    public int D2CardID12;
+    public int D2CardID13;
+    public int D2CardID14;
+    public int D2CardID15;
+    public int D2CardID16;
+    public int D2CardID17;
+    public int D2CardID18;
+    public int D2CardID19;
+    public int D2CardID20;
+    public int D2CardID21;
+    public int D2CardID22;
+    public int D2CardID23;
+    public int D2CardID24;
+}
