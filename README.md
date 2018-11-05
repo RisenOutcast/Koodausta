@@ -15,3 +15,7 @@ Scripts for the platformer game I've written over a year ago, I added them here 
 Second folder is full of scripts from a card/monster turn-based battle game. These I've been writing from early summer and I'm still in progress. This project is my final study work and it's far from completion still. 
 
 I think that by comparing these two folders one can get some idea how much I have progressed and learned in a short time.
+
+-----------
+Korttipeli = Card game
+Tasohyppelypeli = Platformer game
