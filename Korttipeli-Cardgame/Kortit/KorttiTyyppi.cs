@@ -12,7 +12,7 @@ namespace RO
         {
             Elementti t = Settings.GetResurssiSäätäjä().tyyppiElementti;
             KortinAsennusTarpeet tyyppi = asennus.GetProperty(t); 
-            tyyppi.teksti.text = tyyppiNimi; //Tällä saa kortin tyypin näkymään tekstinä kortissa, mikäli haluaa.
+            //tyyppi.teksti.text = tyyppiNimi; //Tällä saa kortin tyypin näkymään tekstinä kortissa, mikäli haluaa.
         }
     }
 }

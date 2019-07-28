@@ -26,20 +26,60 @@ namespace RO
 
             if(k.korttiTyyppi == stattiTyyppi)
             {
-                //Pistä kortti pöydälle
-                Settings.DropStatCard(kortti.value.transform, alueGridi.value.transform,
+                bool canUse = Settings.peliSäätäjä.currentPlayer.CanUseCard(k);
+
+                if (canUse)
+                {
+                    //Pistä kortti pöydälle
+                    Settings.DropStatCard(kortti.value.transform, alueGridi.value.transform,
                         kortti.value);
+                    kortti.value.currentLogic = korttipöydälle;
+                    //Settings.peliSäätäjä.currentPlayer.kortitKädes.RemoveAt(1);
+
+                    Settings.peliSäätäjä.all_players[0].MonsterHealth += k.AddHealth;
+                    Settings.peliSäätäjä.all_players[0].MonsterAttack += k.AddAttack;
+                    Settings.peliSäätäjä.all_players[0].MonsterDefence += k.AddDefence;
+                    Settings.peliSäätäjä.all_players[0].MonsterArmor += k.AddArmor;
+                    Settings.peliSäätäjä.all_players[0].MonsterImpact += k.AddImpact;
+                    Settings.peliSäätäjä.all_players[0].MonsterPierce += k.AddPierce;
+                    Settings.peliSäätäjä.all_players[1].MonsterHealth -= k.TakeHealth;
+                    Settings.peliSäätäjä.all_players[1].MonsterDefence -= k.TakeDefence;
+                    Settings.peliSäätäjä.all_players[1].MonsterAttack -= k.TakeAttack;
+
+                    if (k.Death == true)
+                    {
+                        Settings.peliSäätäjä.all_players[0].Minion1Health = k.AddMinionHealth;
+                        Settings.peliSäätäjä.all_players[0].Minion2Health = k.AddMinionHealth;
+                        Settings.peliSäätäjä.all_players[0].Minion3Health = k.AddMinionHealth;
+                        Settings.peliSäätäjä.all_players[0].Minion4Health = k.AddMinionHealth;
+                    }
+                }
+
                 kortti.value.gameObject.SetActive(true);
-                kortti.value.currentLogic = korttipöydälle;
             }
             else
             if (k.korttiTyyppi == minioniTyyppi)
             {
-                //Pistä kortti pöydälle
-                Settings.DropMinionCard(kortti.value.transform, minioniGridi.value.transform,
+                bool canUse = Settings.peliSäätäjä.currentPlayer.CanUseCard(k);
+
+                if (canUse)
+                {
+                    //Pistä kortti pöydälle
+                    Settings.DropMinionCard(kortti.value.transform, minioniGridi.value.transform,
                         kortti.value);
+                    kortti.value.currentLogic = korttipöydälle;
+                    Settings.peliSäätäjä.all_players[0].hasActiveMinions = true;
+                    Settings.peliSäätäjä.all_players[0].PhasAmount = k.AddPhas;
+                    Settings.peliSäätäjä.all_players[0].AbasAmount = k.AddAbas;
+                    Settings.peliSäätäjä.all_players[0].TygoAmount = k.AddTygo;
+                    Settings.peliSäätäjä.all_players[0].Minion1Health = k.AddMinionHealth;
+                    Settings.peliSäätäjä.all_players[0].Minion2Health = k.AddMinionHealth;
+                    Settings.peliSäätäjä.all_players[0].Minion3Health = k.AddMinionHealth;
+                    Settings.peliSäätäjä.all_players[0].Minion4Health = k.AddMinionHealth;
+                }
+
                 kortti.value.gameObject.SetActive(true);
-                kortti.value.currentLogic = korttipöydälle;
+                
             }
             else
             if (k.korttiTyyppi == kolikkoTyyppi)

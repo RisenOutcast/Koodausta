@@ -7,6 +7,8 @@ namespace RO
     [CreateAssetMenu(menuName = "Vuorot/PelaajaTaisteluPhase")]
     public class TaisteluPhase : Phase
     {
+        public GameStates.State TaisteluStateControl;
+
         public override bool IsComplete()
         {
             if (forceExit)
@@ -32,8 +34,13 @@ namespace RO
         {
             if (!isInit)
             {
-                Settings.peliSäätäjä.SetState(null);
+                Settings.peliSäätäjä.SetState(TaisteluStateControl);
                 Settings.peliSäätäjä.onPhaseChanged.Raise();
+                Debug.Log("Battle phase begins!");
+                Settings.peliSäätäjä.MainCamera.SetActive(false);
+                Settings.peliSäätäjä.BattleCamera.SetActive(true);
+                Settings.peliSäätäjä.MainCanvas.SetActive(false);
+                Settings.peliSäätäjä.BattleCanvas.SetActive(true);
                 isInit = true;
             }
         }

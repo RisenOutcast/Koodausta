@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace RO {
     public class KortinAsentaja : MonoBehaviour {
@@ -8,10 +9,20 @@ namespace RO {
         public Kortti kortti;
         public KortinAsennusTarpeet[] asennusTarpeet;
 
+        private void Awake()
+        {
+            Scene currentScene = SceneManager.GetActiveScene();
+            if (currentScene.name == "CardCollection")
+                LataaKortti(kortti);
+
+        }
+
         public void LataaKortti(Kortti k)
         {
             if (k == null)
                 return;
+
+            k.kortinAsentaja = this;
 
             kortti = k;
 

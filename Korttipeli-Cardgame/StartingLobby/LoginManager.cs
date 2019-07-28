@@ -33,15 +33,31 @@ namespace RO.Login
         private Color32 AlertColor; 
 
         public GameObject RegisterTab;
+        public GameObject ConfirmButton;
+
+        Mestarisäätäjä Mestari;
 
         public string savedUsername;
         public bool Connecting;
 
         private string OldAlert;
+        public string Notify;
+
+        public string CreateUserURL = "http://risenoutcast.hopto.org/RO_Database/InsertUser.php";
+        public string FindUserURL = "http://risenoutcast.hopto.org/RO_Database/Login.php";
+        public string GetUserDataURL = "http://risenoutcast.hopto.org/RO_Database/PlayerData.php";
+
+        public string[] userInformation;
+
+        private Animator CamAnim;
+        private Animator LoginCanvasAnim;
 
         void Awake()
         {
             savedUsername = PlayerPrefs.GetString("Username");
+            Mestari = GameObject.FindWithTag("Mestari").GetComponent<Mestarisäätäjä>();
+            CamAnim = GameObject.FindWithTag("MainCamera").GetComponent<Animator>();
+            LoginCanvasAnim = GameObject.FindWithTag("LoginCanvas").GetComponent<Animator>();
         }
 
         // Use this for initialization
@@ -99,10 +115,29 @@ namespace RO.Login
                 AlertColor = new Color32(255, 0, 0, 255);
             }
 
-            if(PasswordsMatch == true && RegisterTab.activeSelf == true)
+            if(PasswordsMatch == true && RegisterTab.activeSelf == true && Notify == "")
             {
                 AlertText = "";
                 AlertColor = new Color32(255, 255, 255, 255);
+            }
+
+            if(PasswordsMatch == true && FieldsAreGiven == true)
+            {
+                ConfirmButton.SetActive(true);
+            }
+            else
+            {
+                ConfirmButton.SetActive(false);
+            }
+
+            if (Mestari == null)
+                Mestari = GameObject.FindWithTag("Mestari").GetComponent<Mestarisäätäjä>();
+
+            if (Mestari.DevMode == true)
+            {
+                CreateUserURL = "http://192.168.8.101/RO_Database/InsertUser.php";
+                FindUserURL = "http://192.168.8.101/RO_Database/Login.php";
+                GetUserDataURL = "http://192.168.8.101/RO_Database/PlayerData.php";
             }
         }
 
@@ -116,17 +151,17 @@ namespace RO.Login
             if (SaveUsernameToggle.isOn == true)
             {
                 SaveUsername();
-                Debug.Log("Saving...");
+                Debug.Log("Saving username...");
             }
             else
             {
                 DeleteUsername();
-                Debug.Log("Deleting...");
+                Debug.Log("Deleting saved username...");
             }
             AlertText = "Connecting";
             AlertColor = new Color32(0, 160, 255, 255);
             Connecting = true;
-            StartCoroutine(RollDotsOnText()); //Jos tulee joku virhe esim. pelaajaa ei löydy niin pistää vaan StopCoroutine...
+            StartCoroutine(Login(UsernameString, PasswordString));
         }
 
         void GetSavedUsername()
@@ -156,33 +191,77 @@ namespace RO.Login
             Alerts.color = new Color32(255, 255, 255, 255);
         }
 
-        IEnumerator RollDotsOnText()
+        public void MakeUser()
         {
-            OldAlert = AlertText;
-            yield return new WaitForSeconds(0.2F);
-            if (Connecting == true)
+            StartCoroutine(CreateUser(RegisterUsernameString, EmailAddressString, RegisterPasswordString));
+        }
+
+        IEnumerator Login(string username, string password)
+        {
+            WWWForm form = new WWWForm();
+            form.AddField("usernamePost", username);
+            form.AddField("passwordPost", password);
+
+            WWW www = new WWW(FindUserURL, form);
+
+            yield return www;
+            Debug.Log(www.text);
+            Notify = www.text;
+            Alerts.text = www.text;
+            AlertText = www.text;
+            if (www.text == "Login successful!")
             {
-                AlertText = (AlertText + ".");
-                SetAlert();
+                StartCoroutine(FetchUserData(UsernameString));
+                Mestari.Playername = username;
             }
-            yield return new WaitForSeconds(0.2F);
-            if (Connecting == true)
-            {
-                AlertText = (AlertText + ".");
-                SetAlert();
-            }
-            yield return new WaitForSeconds(0.2F);
-            if (Connecting == true)
-            {
-                AlertText = (AlertText + ".");
-                SetAlert();
-            }
-            yield return new WaitForSeconds(0.2F);
-            if(Connecting == true)
-            {
-                AlertText = OldAlert;
-                StartCoroutine(RollDotsOnText());
-            }
+        }
+
+        IEnumerator CreateUser(string username, string email, string password)
+        {
+            WWWForm form = new WWWForm();
+            form.AddField("usernamePost", username);
+            form.AddField("emailPost", email);
+            form.AddField("passwordPost", password);
+
+            Debug.Log("Sending " + username + "," + email + "," + password);
+
+            WWW www = new WWW(CreateUserURL, form);
+
+            yield return www;
+
+            Debug.Log(www.text);
+            Notify = www.text;
+            Alerts.text = www.text;
+            AlertText = www.text;
+        }
+
+        IEnumerator FetchUserData(string username)
+        {
+            WWWForm form = new WWWForm();
+            form.AddField("usernamePost", username);
+            WWW userData = new WWW(GetUserDataURL, form);
+            yield return userData;
+            string userDatastring = userData.text;
+            userInformation = userDatastring.Split(';');
+            Mestari.PlayerID = UserDataValues(userInformation[0], "ID:");
+            Mestari.Email = UserDataValues(userInformation[0], "Email:");
+            Mestari.EmailVerified = UserDataValues(userInformation[0], "Verified:");
+            Mestari.Birthday = UserDataValues(userInformation[0], "Birth:");
+            Mestari.Sex = UserDataValues(userInformation[0], "Sex:");
+            Mestari.Nickname = UserDataValues(userInformation[0], "Nickname:");
+            Mestari.Country = UserDataValues(userInformation[0], "Country:");
+            Mestari.IconID = UserDataValues(userInformation[0], "IconID:");
+            Mestari.UserSince = UserDataValues(userInformation[0], "UserSince:");
+            Mestari.Dev = UserDataValues(userInformation[0], "IsDev:");
+            CamAnim.SetBool("loginSuccesful", true);
+            LoginCanvasAnim.SetBool("LoginSuccesful", true);
+        }
+
+        string UserDataValues(string data, string index)
+        {
+            string value = data.Substring(data.IndexOf(index) + index.Length);
+            value = value.Remove(value.IndexOf("|"));
+            return value;
         }
     }
 }

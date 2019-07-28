@@ -47,20 +47,22 @@ namespace RO
         public static void DropCatalystCard(Transform c, Transform p, KorttiInstanssi korttiInst)
         {
             SetParentForCard(c, p);
-            peliSäätäjä.currentPlayer.UseCoinCards(korttiInst.asentaja.kortti.Hinta);
+            //peliSäätäjä.currentPlayer.UseCoinCards(korttiInst.asentaja.kortti.Hinta);
             peliSäätäjä.currentPlayer.DropCard(korttiInst);
         }
 
         public static void DropStatCard(Transform c, Transform p, KorttiInstanssi korttiInst)
         {
             SetParentForCard(c, p);
+            //peliSäätäjä.currentPlayer.UseCoinCards(korttiInst.asentaja.kortti.Hinta);
             peliSäätäjä.currentPlayer.DropCard(korttiInst);
         }
 
         public static void DropMinionCard(Transform c, Transform p, KorttiInstanssi korttiInst)
         {
             SetParentForCard(c, p);
-            peliSäätäjä.currentPlayer.DropCard(korttiInst);
+            //peliSäätäjä.currentPlayer.UseCoinCards(korttiInst.asentaja.kortti.Hinta);
+            peliSäätäjä.currentPlayer.DropMinionCard(korttiInst);
         }
 
         public static void SetParentForCard(Transform c, Transform p)

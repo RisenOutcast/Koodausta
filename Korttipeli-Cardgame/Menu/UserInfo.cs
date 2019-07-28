@@ -10,27 +10,28 @@ public class UserInfo : MonoBehaviour {
     public Text XP;
     public Image Icon;
 
-    public Säätäjä säädin;
+    public Mestarisäätäjä Mestari;
 
     public GameObject ChooseIcon;
 
     public Sprite Icon0; //HasNotChosenIconYet
     public Sprite Icon1;
     public Sprite Icon2;
+    public Sprite Icon3;
+    public Sprite Icon4;
+    public Sprite Icon5;
 
     void Awake()
     {
-        säädin = GameObject.FindGameObjectWithTag("Switch").GetComponent<Säätäjä>();
+        Mestari = GameObject.FindWithTag("Mestari").GetComponent<Mestarisäätäjä>();
     }
 
     // Use this for initialization
     void Start () {
 
-        playername.text = säädin.PlayerName.ToString();
-        Level.text = säädin.PlayerLevel.ToString();
-        XP.text = säädin.PlayerXP.ToString();
+        playername.text = Mestari.Playername.ToString();
 
-        if (säädin.PlayerIconID == 0)
+        if (Mestari.IconID == 0.ToString())
         {
             ChooseIcon.SetActive(true);
         }
@@ -38,28 +39,45 @@ public class UserInfo : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (Mestari == null)
+        {
+            GameObject.FindWithTag("Mestari").GetComponent<Mestarisäätäjä>();
+        }
+
         #region //Icons
-        if (säädin.PlayerIconID == 0)
+        if (Mestari.IconID == 0.ToString())
         {
             ChooseIcon.SetActive(true);
         }
-        if (säädin.PlayerIconID == 0)
+        if (Mestari.IconID == 1.ToString())
         {
             Icon.sprite = Icon0;
         }
-        if (säädin.PlayerIconID == 1)
+        if (Mestari.IconID == 2.ToString())
         {
             Icon.sprite = Icon1;
         }
-        if (säädin.PlayerIconID == 2)
+        if (Mestari.IconID == 3.ToString())
         {
             Icon.sprite = Icon2;
+        }
+        if (Mestari.IconID == 4.ToString())
+        {
+            Icon.sprite = Icon3;
+        }
+        if (Mestari.IconID == 5.ToString())
+        {
+            Icon.sprite = Icon4;
+        }
+        if (Mestari.IconID == 6.ToString())
+        {
+            Icon.sprite = Icon5;
         }
         #endregion
     }
 
-    public void SelectIcon(int IconID)
+    public void SelectIcon(string IconID)
     {
-        säädin.PlayerIconID = IconID;
+        Mestari.IconID = IconID.ToString();
     }
 }

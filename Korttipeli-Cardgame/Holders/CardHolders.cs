@@ -29,6 +29,5 @@ namespace RO
                 k.cardObject.transform.SetParent(rahaGridi.value.transform);
             }
         }
-
     }
 }

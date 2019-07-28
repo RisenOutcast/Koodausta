@@ -36,6 +36,10 @@ namespace RO
             {
                 Settings.peliSäätäjä.SetState(pelaajaControlliState);
                 Settings.peliSäätäjä.onPhaseChanged.Raise();
+                Settings.peliSäätäjä.MainCamera.SetActive(true);
+                Settings.peliSäätäjä.BattleCamera.SetActive(false);
+                Settings.peliSäätäjä.MainCanvas.SetActive(true);
+                Settings.peliSäätäjä.BattleCanvas.SetActive(false);
                 isInit = true;
             }
         }

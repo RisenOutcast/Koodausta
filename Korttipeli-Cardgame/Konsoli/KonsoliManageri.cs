@@ -31,7 +31,7 @@ namespace RO.Konsoli
         public void RegisterEvent(string s, Color color)
         {
             index++;
-            if (index > textObjects.Length)
+            if (index == textObjects.Length)
             {
                 index = 0;
             }
