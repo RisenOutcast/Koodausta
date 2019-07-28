@@ -3,11 +3,15 @@
 ###### _in Finnish_
 Kaksi kansiollista kahdesta eri projektista mitä olen työstänyt.
 
-Tasohyppely koodit on jo yli vuosi sitten tehty ja lisäsin ne tähän lähinnä vertailun vuoksi, niistä näkee aika hyvin että kuinka paljon olen edistynyt ja oppinut uutta.
+Tasohyppely koodit on jo yli 2 vuotta sitten tehty ja lisäsin ne tähän lähinnä vertailun vuoksi, niistä näkee aika hyvin että kuinka paljon olen edistynyt ja oppinut uutta.
 
-Korttipelin koodeja on kirjoiteltu viime keväästä tähän hetkeen. Projekti on on siis lopputyöni ja se on vielä pahasti kesken, mutta siinä on jo ihan mukavasti tavaraa tullut kirjoiteltua.
+Korttipelin oli lopputyö projektini ja yksi monimutkaisimmista projekteistani.
 
-###### _in English_
+Topdown wave clear peli on alunperin Finnish Game Jameillä tehty peli, jossa taistellaan vaikeutuvia vihollisaaltoja vastaan.
+
+Multplayer mobile game on Platonic Partnershipin työssäoppimisin tuotoksena tehty demo nopea tempoisesti 1v1 pelistä mobiililaitteille.
+
+###### _in English_ OUTDATED
 Two folders full of scripts from two different games I've made.
 
 Scripts for the platformer game I've written over a year ago, I added them here for comparison.
