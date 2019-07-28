@@ -9,7 +9,7 @@ Korttipelin oli lopputyö projektini ja yksi monimutkaisimmista projekteistani.
 
 Topdown wave clear peli on alunperin Finnish Game Jameillä tehty peli, jossa taistellaan vaikeutuvia vihollisaaltoja vastaan.
 
-Multplayer mobile game on Platonic Partnershipin työssäoppimisin tuotoksena tehty demo nopea tempoisesti 1v1 pelistä mobiililaitteille.
+Multiplayer mobile game on Platonic Partnershipin työssäoppimisin tuotoksena tehty demo nopea tempoisesti 1v1 pelistä mobiililaitteille.
 
 ###### _in English_ OUTDATED
 Two folders full of scripts from two different games I've made.
